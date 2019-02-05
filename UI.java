@@ -13,12 +13,12 @@ public class UI extends Serielist{
 	JTextField NameField, SeasonField, StateField, RenewDateField;
 	JTextArea textArea;
 	JButton Add;
-	JPanel thePanel;
+	JPanel thePanel, canvas; 
 	JScrollPane scrollbar;
 	
 	void listPrinter() {
 		for(Serie s : listOfseries) {
-			textArea.append(s.toString());
+			textArea.append(s.toString2());
 			textArea.append("\n");
 		}
 	}
@@ -26,13 +26,13 @@ public class UI extends Serielist{
 	public UI() throws Exception{
 		
 		thePanel = new JPanel();
+		canvas = new JPanel();
 		JFrame Xframe = new JFrame("TV Status");
 		Xframe.setLayout(new FlowLayout());
-		Xframe.setSize(1500, 900);
+		Xframe.setSize(1000, 600);
 		Xframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//Xframe.setResizable(true);
-		Xframe.add(thePanel);
-				
+						
 		Name = new JLabel("Name"); 				NameField = new JTextField("serie name", 14);			
 		Season = new JLabel("Season"); 			SeasonField = new JTextField("0", 14);
 		State = new JLabel("State"); 			StateField = new JTextField("serie state", 14);
@@ -42,7 +42,7 @@ public class UI extends Serielist{
 		ListenForButton lForButton = new ListenForButton();
 		Add.addActionListener(lForButton);
 		
-		textArea = new JTextArea(10, 20);
+		textArea = new JTextArea(20, 80);
 		scrollbar = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		textArea.setLineWrap(true);
@@ -52,9 +52,11 @@ public class UI extends Serielist{
 		thePanel.add(State);					thePanel.add(StateField);
 		thePanel.add(RenewDate);				thePanel.add(RenewDateField);
 		thePanel.add(Add);
-		thePanel.add(textArea);
-		thePanel.add(scrollbar);
+		canvas.add(textArea);
+		canvas.add(scrollbar);
 		
+		Xframe.add(thePanel);
+		Xframe.add(canvas);
 		Xframe.setVisible(true);
 		listPrinter();
 	}
